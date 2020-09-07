@@ -10,6 +10,7 @@ class Canvas:
     def __init__(self, size):
         self.size = size
         self.canvas = [[1 for i in range(self.width())] for j in range(self.height())]
+        self.chars = CHARS
 
     def __getitem__(self, index):
         return self.canvas[index]
@@ -24,7 +25,7 @@ class Canvas:
         return FONT_ASPECT_RATIO * self.width() / self.height()
 
     def __str__(self):
-        rows = ["".join([CHARS[int(dist * (len(CHARS) - 1))] for dist in row]) for row in self]
+        rows = ["".join([self.chars[int(dist * (len(self.chars) - 1))] for dist in row]) for row in self]
         return "\n".join(rows)
 
     def clear(self):
