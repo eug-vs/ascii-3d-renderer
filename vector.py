@@ -19,10 +19,16 @@ class Vector:
         z = self.z - other.z
         return Vector(x, y, z)
 
-    def __mul__(self, scalar):
-        x = self.x * scalar
-        y = self.y * scalar
-        z = self.z * scalar
+    def __mul__(self, other):
+        if type(other) is Vector:
+            x = self.x * other.x
+            y = self.y * other.y
+            z = self.z * other.z
+            return x + y + z
+
+        x = self.x * other
+        y = self.y * other
+        z = self.z * other
         return Vector(x, y, z)
 
     def __truediv__(self, scalar):
@@ -45,7 +51,7 @@ class Vector:
         return self.z
 
     def magnitude(self):
-        return sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
+        return sqrt(self * self)
 
     def normalized(self):
         return self / self.magnitude()
@@ -71,5 +77,6 @@ if __name__ == "__main__":
     assert v - v / 2 == Vector(0.5, 1, 1.5)
     assert v[0] == 1 and v[1] == 2 and v[2] == 3
     assert Vector() == 0
+    assert v * v == 14
     print("All tests have passed!")
 
