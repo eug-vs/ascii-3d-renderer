@@ -1,4 +1,5 @@
 from core.vector import *
+from core.lightsource import *
 from core.camera import *
 from core.canvas import *
 from core.player import *

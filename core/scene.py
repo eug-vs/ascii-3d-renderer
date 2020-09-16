@@ -2,7 +2,7 @@ from core import Player
 
 
 # Top-level class for the whole scene
-class Scene(list):
+class Scene:
     def __init__(self, name, camera, objects = [], frame_count = 30):
         self.name = name
         self.player = Player(name)

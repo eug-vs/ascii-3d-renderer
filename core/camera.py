@@ -1,17 +1,15 @@
-from core import Vector
 from math import sqrt, tan, pi as PI
+from core import Vector, LightSource
 
 
 # Camera class for scene
-class Camera:
+class Camera(LightSource):
     def __init__(self, pos, direction, canvas, angle, max_range, distance = 1):
-        self.pos = pos
+        super().__init__(pos, max_range, max_range / len(canvas.chars))
         self.direction = direction
         self.angle = angle
         self.distance = distance
         self.canvas = canvas
-        self.ray_step = max_range / len(canvas.chars)
-        self.max_range = max_range
         self.screen_width = distance * tan(angle / 2) * 2
         self.screen_height = self.screen_width / canvas.aspect_ratio()
 
@@ -40,20 +38,10 @@ class Camera:
             for i in range(self.canvas.width()):
                 ray_dir += screen["h_step"]
 
-                ray = ray_dir.normalized() * self.ray_step
-
-                point = self.pos
-                for step in range(int(self.max_range / self.ray_step)):
-                    point += ray
-                    for obj in objects:
-                        if point in obj:
-                            dist = step * self.ray_step / self.max_range
-                            self.canvas[j][i] = min(dist, self.canvas[j][i])
-                            break
-                    else:
-                        continue
-                    break
+                point = self.shoot_ray(ray_dir, objects)
+                if point:
+                    dist = (point - self.pos).magnitude()
+                    self.canvas[j][i] = min(dist / self.brightness, self.canvas[j][i])
 
             ray_dir -= screen["h_step"] * self.canvas.width()
-
 
