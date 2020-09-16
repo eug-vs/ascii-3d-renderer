@@ -5,7 +5,7 @@ from core import Player
 class Scene(list):
     def __init__(self, name, camera, objects = [], frame_count = 30):
         self.name = name
-        self.player = Player(name + ".scn")
+        self.player = Player(name)
         self.camera = camera
         self.objects = objects
         self.frame_count = frame_count
@@ -30,7 +30,7 @@ class Scene(list):
             self.render_frame(silent)
             self.post_frame_hook(index)
             self.advance(index)
-        self.player.save(self.name + ".scn")
+        self.player.save()
 
     def start(self):
         if not self.player:

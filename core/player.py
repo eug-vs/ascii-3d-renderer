@@ -5,13 +5,13 @@ SEPARATOR = "\n==FRAME==\n"
 
 
 class Player(list):
-    def __init__(self, filename):
-        if filename:
-            self.read(filename)
+    def __init__(self, filename, raw = False):
+        self.filename = filename if raw else f"cache/{filename}.scn"
+        self.read()
 
-    def save(self, filename):
+    def save(self):
         try:
-            f = open(filename, "w")
+            f = open(self.filename, "w")
             for frame in self:
                 f.write(frame)
                 f.write(SEPARATOR)
@@ -19,9 +19,9 @@ class Player(list):
         finally:
             return self
 
-    def read(self, filename):
+    def read(self):
         try:
-            f = open(filename, "r")
+            f = open(self.filename, "r")
             self += f.read().split(SEPARATOR)
             f.close()
         finally:
