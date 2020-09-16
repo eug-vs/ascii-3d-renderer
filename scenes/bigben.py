@@ -5,13 +5,14 @@ from shapes import Sphere, Cuboid
 # Camera
 canvas = Canvas(Vector(60, 30))
 camera = Camera(Vector(3, 3, 0), Vector(0, 0, 1), canvas, PI / 3, 6)
-camera_focus = Vector(3, 3, 5)
-step_mag = 0.3
+focus = Vector(3, 3, 5)
 
 def rotate(self):
-    camera.direction = (camera_focus - camera.pos).normalized()
-    step = camera.direction.rotate_y(PI / 2).normalized() * step_mag
-    camera.pos += step
+    radius_vector = (camera.pos - focus).rotate_y(2 * PI / 60)
+    camera.pos = focus + radius_vector
+    camera.direction = radius_vector.normalized().reversed()
+
+camera.advance = rotate
 
 
 # Objects
@@ -22,7 +23,6 @@ objects = [body, head] + balls
 
 
 # Scene
-bigben = Scene("bigben", camera, objects)
-bigben.post_frame_hook = rotate
-bigben.iterator = range(int(2 * PI * (camera.pos - camera_focus).magnitude() / step_mag))
+scene = Scene("bigben", camera, objects)
+scene.iterator = range(30)
 

@@ -1,3 +1,3 @@
-from scenes.bigben import bigben
+from scenes.bigben import scene
 
-bigben.start()
+scene.start()

@@ -1,6 +1,7 @@
 from core import Player
 
 
+# Top-level class for the whole scene
 class Scene(list):
     def __init__(self, name, camera, objects = [], iterator = []):
         self.name = name
@@ -17,12 +18,18 @@ class Scene(list):
         self.camera.canvas.clear()
 
     def post_frame_hook(self, iteration):
-        print(f"Iteration {iteration}")
+        print(f"Frame #{iteration}")
+
+    def advance(self, iteration):
+        for object in self.objects + [self.camera]:
+            if hasattr(object, "advance") and callable(object.advance):
+                object.advance(iteration)
 
     def render(self, silent = False):
         for iteration in self.iterator:
             self.render_frame(silent)
             self.post_frame_hook(iteration)
+            self.advance(iteration)
         self.player.save(self.name + ".scn")
 
     def start(self):

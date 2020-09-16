@@ -56,6 +56,9 @@ class Vector:
     def normalized(self):
         return self / self.magnitude()
 
+    def reversed(self):
+        return self * (-1)
+
     def rotate_y(self, angle):
         x = self.x * cos(angle) + self.z * sin(angle)
         y = self.y
