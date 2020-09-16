@@ -1,4 +1,4 @@
-from vector import Vector
+from core import Vector
 from math import sqrt, tan, pi as PI
 
 

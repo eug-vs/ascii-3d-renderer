@@ -1,4 +1,4 @@
-from vector import Vector
+from core import Vector
 
 
 FONT_ASPECT_RATIO = 1 / 2
