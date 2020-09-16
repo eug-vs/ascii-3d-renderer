@@ -1,8 +1,8 @@
 class Sphere:
-    def __init__(self, center, radius):
-        self.center = center
+    def __init__(self, pos, radius):
+        self.pos = pos
         self.radius = radius
 
     def __contains__(self, point):
-        return (self.center - point).magnitude() < self.radius
+        return (self.pos - point).magnitude() < self.radius
 
