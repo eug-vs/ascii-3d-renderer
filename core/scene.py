@@ -23,7 +23,7 @@ class Scene(list):
     def advance(self, iteration):
         for object in self.objects + [self.camera]:
             if hasattr(object, "advance") and callable(object.advance):
-                object.advance(iteration)
+                object.advance(object, iteration)
 
     def render(self, silent = False):
         for iteration in self.iterator:
