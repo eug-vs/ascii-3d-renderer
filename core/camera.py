@@ -29,7 +29,7 @@ class Camera(LightSource):
             "corner": corner,
         }
 
-    def render(self, objects):
+    def render(self, objects, lights = []):
         screen = self.screen()
 
         ray_dir = screen["corner"] - self.pos
@@ -41,7 +41,18 @@ class Camera(LightSource):
                 point = self.shoot_ray(ray_dir, objects)
                 if point:
                     dist = (point - self.pos).magnitude()
-                    self.canvas[j][i] = min(dist / self.brightness, self.canvas[j][i])
+                    if lights:
+                        dist = None
+                        for source in lights:
+                            new_dist = source.light(point, objects)
+                            if dist and new_dist:
+                                dist = min(dist, new_dist)
+                            elif new_dist:
+                                dist = new_dist
+                    if dist:
+                        self.canvas[j][i] = dist / self.brightness
+                    else:
+                        self.canvas[j][i] = 0.99
 
             ray_dir -= screen["h_step"] * self.canvas.width()
 

@@ -16,9 +16,9 @@ class LightSource:
 
     def light(self, point, objects):
         direction = point - self.pos
-        obstacle = shoot_ray(direction, objects)
+        obstacle = self.shoot_ray(direction, objects)
         if obstacle:
-            dist = (obstacle - self.pos).magnitude()
+            distance = (obstacle - self.pos).magnitude()
             if distance >= direction.magnitude():
                 return distance
         return None
