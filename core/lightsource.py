@@ -1,4 +1,4 @@
-from core import Object
+from core import Object, palette
 
 
 def intersect(interval, *intervals):
@@ -15,10 +15,9 @@ def intersect(interval, *intervals):
 
 # Base class for any ray emitter
 class LightSource(Object):
-    def __init__(self, pos, brightness, ray_step):
+    def __init__(self, pos, brightness):
         super().__init__(pos)
         self.brightness = brightness
-        self.ray_step = ray_step
 
     def light(self, point, objects):
         direction = point - self.pos
@@ -30,10 +29,10 @@ class LightSource(Object):
         return None
 
     def shoot_ray(self, direction, objects):
-        ray = direction.normalized() * self.ray_step
-
-        step_count = int(self.brightness / self.ray_step)
+        step_count = len(palette)
         min_step = step_count
+
+        ray = direction.normalized() * self.brightness / step_count
         collision_objects = []
 
         for object in objects:

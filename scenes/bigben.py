@@ -10,8 +10,8 @@ camera.advance = combine(
     rotate(Vector(3, 3, 5), -2 * PI / 60),
 )
 
-main_light = LightSource(Vector(2, 4.5, 1), 9, 9 / len(canvas.chars))
-secondary_light = LightSource(Vector(6, 3, 7), 4, 4 / len(canvas.chars))
+main_light = LightSource(Vector(2, 4.5, 1), 9)
+secondary_light = LightSource(Vector(6, 3, 7), 4)
 lights = [main_light, secondary_light]
 
 

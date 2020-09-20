@@ -1,11 +1,11 @@
 from math import sqrt, tan, pi as PI
-from core import Vector, LightSource
+from core import Vector, LightSource, palette
 
 
 # Camera class for scene
 class Camera(LightSource):
     def __init__(self, pos, direction, canvas, angle, max_range, distance = 1):
-        super().__init__(pos, max_range, max_range / len(canvas.chars))
+        super().__init__(pos, max_range)
         self.direction = direction
         self.angle = angle
         self.distance = distance

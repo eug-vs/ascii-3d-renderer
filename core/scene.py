@@ -1,4 +1,4 @@
-from core import Player
+from core import Player, palette
 
 
 # Top-level class for the whole scene
@@ -15,7 +15,7 @@ class Scene:
         print("Preparing scene...")
         for object in self.objects:
             print(f"Building bounding box for {object}")
-            object.compute_bounding_box(self.camera.ray_step)
+            object.compute_bounding_box(self.camera.brightness / len(palette))
 
     def render_frame(self, silent = False):
         self.camera.render(self.objects, self.lights)
