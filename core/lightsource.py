@@ -39,14 +39,15 @@ class LightSource(Object):
             collision_step_intervals = []
 
             for axis in range(3):
-                # For each axis find an interval where ray overlaps an object
-                axis_collision_interval = sorted([
-                    (corner[axis] - self.pos[axis]) / ray[axis] for corner in object.bounds()
-                ])
-                if all(bound < 0 for bound in axis_collision_interval):
-                    # The ray will never hit an object
-                    break
-                collision_step_intervals.append(axis_collision_interval)
+                if ray[axis] != 0:
+                    # For each axis find an interval where ray overlaps an object
+                    axis_collision_interval = sorted([
+                        (corner[axis] - self.pos[axis]) / ray[axis] for corner in object.bounds()
+                    ])
+                    if all(bound < 0 for bound in axis_collision_interval):
+                        # The ray will never hit an object
+                        break
+                    collision_step_intervals.append(axis_collision_interval)
             else:
                 intersection = intersect(*collision_step_intervals)
                 if intersection:
