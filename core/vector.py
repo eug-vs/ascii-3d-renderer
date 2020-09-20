@@ -12,7 +12,7 @@ class Vector:
         y = self.y + other.y
         z = self.z + other.z
         return Vector(x, y, z)
-        
+
     def __sub__(self, other):
         x = self.x - other.x
         y = self.y - other.y
@@ -58,6 +58,9 @@ class Vector:
 
     def reversed(self):
         return self * (-1)
+
+    def copy(self):
+        return Vector(self.x, self.y, self.z)
 
     def rotate_y(self, angle):
         x = self.x * cos(angle) + self.z * sin(angle)

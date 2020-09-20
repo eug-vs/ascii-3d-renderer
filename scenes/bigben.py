@@ -4,7 +4,7 @@ from core.dynamics import rotate, oscillate, combine
 from shapes import Sphere, Cuboid
 
 # Camera
-canvas = Canvas(Vector(90, 45))
+canvas = Canvas(Vector(60, 30))
 camera = Camera(Vector(3, 3, 0), Vector(0, 0, 1), canvas, PI / 3, 13)
 camera.advance = combine(
     rotate(Vector(3, 3, 5), -2 * PI / 60),
@@ -19,8 +19,8 @@ lights = [main_light, secondary_light]
 body = Cuboid(Vector(3, 3, 5), Vector(1.2, 3, 1))
 head = Sphere(Vector(3, 4.5, 5), 0.8)
 balls = [Sphere(Vector(x, 1, 5), 1) for x in [2, 4]]
-wall = Cuboid(Vector(3, 3, 10.5), Vector(10, 10, 1))
-corner = Cuboid(Vector(-2.5, 3, 5), Vector(1, 10, 10))
+wall = Cuboid(Vector(3, 3, 11), Vector(10, 10, 1))
+corner = Cuboid(Vector(-3, 3, 5), Vector(1, 10, 10))
 floor = Cuboid(Vector(3, 0, 5), Vector(10, 1, 10))
 objects = [body, head, wall, corner, floor] + balls
 

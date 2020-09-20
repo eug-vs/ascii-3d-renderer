@@ -11,6 +11,12 @@ class Scene:
         self.lights = lights
         self.frame_count = frame_count
 
+    def prepare(self):
+        print("Preparing scene...")
+        for object in self.objects:
+            print(f"Building bounding box for {object}")
+            object.compute_bounding_box(self.camera.ray_step)
+
     def render_frame(self, silent = False):
         self.camera.render(self.objects, self.lights)
         if not silent:
@@ -27,6 +33,7 @@ class Scene:
                 object.advance(object, index)
 
     def render(self, silent = False):
+        self.prepare()
         for index in range(self.frame_count):
             self.render_frame(silent)
             self.post_frame_hook(index)
